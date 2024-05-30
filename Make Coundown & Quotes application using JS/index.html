@@ -1,102 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-    }
-
-    #countdown {
-        display: flex;
-        justify-content: space-around;
-        font-size: 3rem;
-        margin-bottom: 2rem;
-    }
-
-    #countdown div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #quote {
-        font-size: 40;
-        text-align: center;
-        margin-top: 2rem;
-    }
-</style>
-
 <body>
-    <div id="countdown">
-        <div>
-            <span id="hours"></span>
-            <div>Hours</div>
-        </div>&nbsp;
-        <div>
-            <span id="minutes"></span>
-            <div>Minutes</div>
-        </div>&nbsp;
-        <div>
-            <span id="seconds"></span>
-            <div>Seconds</div>
-        </div>&nbsp;
+
+    <div class="main-timer-con">
+        <h2>Click On Button Given Below </h2>
+        <p> ( Only One Min Timer Is Run )</p>
+
+        <h1 class="timer-h1">
+        </h1>
+        <button  class="btn2"  id="btn">
+            Run Timer
+        </button>
+        <button  class="btn2" id="btn2">Stop</button>
+
     </div>
-
-    <div id="quote"></div>
-    <button onclick="getQuote()">Sumbit</button>
-
 </body>
+</html>
 
 <script>
-    const quotes = [
-        "The only way to do great work is to love what you do.",
-        "Believe you can and you're halfway there.",
-        "Don't watch the clock; do what it does. Keep going."
-    ];
 
-    function getQuote() {
-        const Quote = quotes[Math.floor(Math.random() * quotes.length)];
-        document.getElementById("quote").innerText = Quote;
-    }
 
-    // Quote
-    const today = new Date();
-    const day = today.getDate();
-    if (!localStorage.getItem("lastQuoteDay") || localStorage.getItem("lastQuoteDay") !== day) {
-        getQuote();
-        localStorage.setItem("lastQuoteDay", day);
-    }
+    let btn =document.getElementById("btn")
+    let btn2 =document.getElementById("btn2")
 
-    // Countdown timer
-    const targetDate = new Date("2024-05-16T06:00:00").getTime();
-    const countdown = document.getElementById("countdown");
-
-    setInterval(() => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        const hours = Math.floor((distance % (1000 * 3600 * 24)) / (1000 * 3600));
-        const minutes = Math.floor((distance % (1000 * 3600)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("hours").innerText = hours;
-        document.getElementById("minutes").innerText = minutes;
-        document.getElementById("seconds").innerText = seconds;
-
-        if (distance < 0) {
-            clearInterval(countdown);
-            document.getElementById("countdown").innerText = "Countdown complete!";
+    btn.addEventListener("click",()=>{
+        let timer=60;
+        stop= setInterval(()=>{
+            timer--
+        if(timer<0)
+        {
+            clearInterval(id)
         }
-    }, 1000);
-</script>
+        let id = document.querySelector("h1").innerText=" 00 :" + " " + timer
+        },1000)
+    })
 
-</html>
+    btn2.addEventListener("click",()=>{
+        clearInterval(stop)
+    })
+   
+
+</script>
